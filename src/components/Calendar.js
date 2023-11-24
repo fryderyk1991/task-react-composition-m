@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { loadData } from '../calendarProvider';
 import CalendarList from "./CalendarList";
+import CalendarForm from "./CalendarForm";
+import '../css/calendar.css'
 class Calendar extends Component {
     state = {
         meetings: [],
-        //lista spotkań do renderu
-        // metody do API
     }
     componentDidMount() {
         loadData()
@@ -20,6 +20,7 @@ render() {
         <section className="calendar">
             <h1>Calendar</h1>
             <CalendarList meetingList={meetings}/>
+            <CalendarForm />
         </section>
     )
 }
