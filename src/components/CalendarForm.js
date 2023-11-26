@@ -1,24 +1,18 @@
 import React, { Component } from "react";
+import FormInput from "./FormInput";
+
 class CalendarForm extends Component {
 render() {
+    const { inputFields, values, submit, onChange } = this.props;
+   
     return (
-        <form>
-            <label>First name:
-                <input type="text" name='' />
-            </label>
-            <label>Last name:
-                <input type="text" name='' />
-            </label>
-            <label>Email:
-                <input type="email" name='' />
-            </label>
-            <label>Date:
-                <input type="date" name='' />
-            </label>
-            <label>Time:
-                <input type="time" name='' />
-            </label>
-        </form>
+        <form className="calendar__form" onSubmit={submit}> 
+            {inputFields.map((input) => (
+                <FormInput  key={input.id} value={values[input.name]} onChange={onChange} {...input} />
+            ))} 
+
+            <button type="submit">Add meeting</button>
+        </form>  
     )
 }
 }

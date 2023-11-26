@@ -1,2 +1,12 @@
-
+.form__group  {
+    display: block;
+}
+.form__error {
+    display: none;
+    color: red;
+    margin-bottom: 5px;
+}
+input, label {
+    display: block;
+}
 
