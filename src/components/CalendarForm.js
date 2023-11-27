@@ -3,15 +3,15 @@ import FormInput from "./FormInput";
 
 class CalendarForm extends Component {
 render() {
-    const { inputFields, values, submit, onChange } = this.props;
+    const { inputFields, values, submit, onChange, errors} = this.props;
    
     return (
-        <form className="calendar__form" onSubmit={submit}> 
+        <form className="calendar__form" onSubmit={submit} noValidate> 
             {inputFields.map((input) => (
-                <FormInput  key={input.id} value={values[input.name]} onChange={onChange} {...input} />
+                <FormInput  key={input.id} value={values[input.name]} onChange={onChange} {...input} error={errors[input.name]} />
             ))} 
 
-            <button type="submit">Add meeting</button>
+            <button className="calendar__button--submit" type="submit">Add meeting</button>
         </form>  
     )
 }

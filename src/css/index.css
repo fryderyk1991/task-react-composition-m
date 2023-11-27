@@ -1,12 +1,22 @@
 .form__group  {
     display: block;
 }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.form__label, .form__input {
+    display: block;
+}
+.form__label {
+    margin-top: 5px;
+}
+
 .form__error {
-    display: none;
     color: red;
     margin-bottom: 5px;
+    font-size: 13px;
 }
-input, label {
-    display: block;
+.calendar__button--submit {
+    margin-top: 10px;
 }
 
