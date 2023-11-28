@@ -1,7 +1,7 @@
 const url = "http://localhost:3005/meetings";
 
-function fetchData(options = { method: "GET" }, id = "") {
-  const path = url + id;
+function fetchData(options = { method: "GET" }, additionalPath = "") {
+  const path = url + additionalPath;
   const promise = fetch(path, options);
   return promise
     .then((resp) => {
@@ -15,8 +15,8 @@ function fetchData(options = { method: "GET" }, id = "") {
     })
     .catch((err) => console.log(err));
 }
-export function getDataFromAPI() {
-  return fetchData();
+export function getDataFromAPI(path) {
+  return fetchData(null, path);
 }
 export function postDataToAPI(data) {
   const options = {

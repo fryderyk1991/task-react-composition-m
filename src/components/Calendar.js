@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getDataFromAPI, postDataToAPI } from '../calendarProvider';
+import { getDataFromAPI, postDataToAPI} from '../calendarProvider';
 import CalendarList from "./CalendarList";
 import CalendarForm from "./CalendarForm";
 class Calendar extends Component {
@@ -45,6 +45,7 @@ class Calendar extends Component {
             time: '',
         },
         errors: {},
+        autoComplete: {},
     }
     componentDidMount() {
         getDataFromAPI()
@@ -56,8 +57,8 @@ class Calendar extends Component {
     handleSubmit = e => {
         e.preventDefault();
         this.validation()
-      
     }
+    
     validation = () => {
         const { values, errors} = this.state;
           Object.keys(values).forEach(key => {
@@ -102,8 +103,15 @@ class Calendar extends Component {
                 [name]: value,
             },
         }));
-        
+        if(name === 'firstName') {
+            this.showInputAutoComplete(value)
+        }
     }
+    showInputAutoComplete = (value) => {
+      const path =  `?firstName_like=${value}`;
+      getDataFromAPI(`${path}`)
+      .then(resp => console.log(resp))
+    }    
 render() {
     const { meetings, inputs, values, errors } = this.state;
     return (
