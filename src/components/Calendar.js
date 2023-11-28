@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getDataFromAPI, postDataToAPI} from '../calendarProvider';
 import CalendarList from "./CalendarList";
 import CalendarForm from "./CalendarForm";
+import '../css/calendar.css'
 class Calendar extends Component {
     state = {
         meetings: [],
@@ -45,7 +46,7 @@ class Calendar extends Component {
             time: '',
         },
         errors: {},
-        autoComplete: {},
+        autoComplete: [],
     }
     componentDidMount() {
         getDataFromAPI()
@@ -91,7 +92,6 @@ class Calendar extends Component {
             Object.keys(values).forEach(key => {
                 values[key] = "";
             })
-            console.log(values)
         }
     }
     
@@ -104,21 +104,29 @@ class Calendar extends Component {
             },
         }));
         if(name === 'firstName') {
-            this.showInputAutoComplete(value)
+            this.showInputAutoComplete(value);
         }
     }
     showInputAutoComplete = (value) => {
-      const path =  `?firstName_like=${value}`;
-      getDataFromAPI(`${path}`)
-      .then(resp => console.log(resp))
+        if(value.length > 0) {
+            const path =  `?firstName_like=${value}`;
+            getDataFromAPI(`${path}`)
+            .then(data => {
+              this.setState({ autoComplete: [...data]})
+            })
+            .catch(err => console.log(err));
+        } else {
+            this.setState({ autoComplete: {}})
+        } 
+    
     }    
 render() {
-    const { meetings, inputs, values, errors } = this.state;
+    const { meetings, inputs, values, errors, autoComplete } = this.state;
     return (
         <section className="calendar">
-            <h1>Calendar</h1>
+            <h1 className="calendar__heading">Calendar</h1>
             <CalendarList meetingList={meetings}/>
-            <CalendarForm inputFields={ inputs } values={ values } submit={this.handleSubmit} onChange={this.onChange} errors={errors}/>
+            <CalendarForm inputFields={ inputs } values={ values } submit={this.handleSubmit} onChange={this.onChange} errors={errors} autoComplete={autoComplete}/>
         </section>
     )
 }

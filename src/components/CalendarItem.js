@@ -4,7 +4,7 @@ class CalendarItem extends Component {
     render() {
         const { fName, lName, email, date, time} = this.props;
         return (
-            <li>{fName} {lName}, {email}, {date}, {time}</li>
+            <li className="calendar__list-item">{fName} {lName}, {email}, {date}, {time}</li>
         )
     }
 }

@@ -1,0 +1,10 @@
+.calendar__heading {
+    margin-top: 10px;
+    text-align: center;
+}
+.calendar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

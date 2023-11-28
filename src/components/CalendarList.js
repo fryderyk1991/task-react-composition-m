@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CalendarItem from "./CalendarItem";
+import '../css/calendarList.css'
 class CalendarList extends Component {
 render() {
     const { meetingList } = this.props;

@@ -1,4 +1,20 @@
 {
   "meetings": [
+    {
+      "firstName": "Jan",
+      "lastName": "Kowalski",
+      "email": "janek@gmailc.om",
+      "date": "0022-02-22",
+      "time": "22:02",
+      "id": 1
+    },
+    {
+      "firstName": "Adam ",
+      "lastName": "Nowak",
+      "email": "nowak@gmail.com",
+      "date": "2023-11-03",
+      "time": "21:35",
+      "id": 2
+    }
   ]
 }

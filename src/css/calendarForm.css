@@ -1,0 +1,60 @@
+.form__group  {
+    display: block;
+}
+.form__label, .form__input {
+    display: block;
+    color: #D3D5E5;
+}
+.form__label {
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.form__error {
+    color: rgba(255, 0, 0, 0.918);
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.calendar__button--submit {
+    margin-top: 10px;
+    background-color: #2E91DA;
+    border: none;
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 30px;
+    color: white;
+    font-weight: 700;
+}
+.calendar__form {
+    background-color: #1B1B30;
+    padding: 20px 0;
+    border-radius: 10px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form__group {
+    width: 90%;
+    margin: 5px auto;
+    position: relative;
+}
+.form__input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #35354A;
+}
+.form__result {
+    width: 100%;
+    min-height: 100px;
+    z-index: 10;
+    background-color: #35354A;
+    border-radius: 10px;
+    position: absolute;
+}
+.form__result-item {
+    margin: 10px;
+}
