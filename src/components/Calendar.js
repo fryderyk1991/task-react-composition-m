@@ -104,10 +104,13 @@ class Calendar extends Component {
                 [name]: value,
             },
         }));
+        this.showInputAutoComplete(value)
     }
+
     onClick = e => {
-        console.log(e)
+      
     }
+    
     showInputAutoComplete = (value) => {
         if(value.length > 0) {
             const path =  `?firstName_like=${value}`;

@@ -50,7 +50,6 @@
 }
 .form__result {
     width: 100%;
-    min-height: 100px;
     z-index: 10;
     background-color: #35354A;
     border-radius: 10px;
