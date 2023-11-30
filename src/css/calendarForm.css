@@ -25,6 +25,7 @@
     margin-top: 30px;
     color: white;
     font-weight: 700;
+    cursor: pointer;
 }
 .calendar__form {
     background-color: #1B1B30;

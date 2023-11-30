@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getDataFromAPI, postDataToAPI} from '../calendarProvider';
 import CalendarList from "./CalendarList";
 import CalendarForm from "./CalendarForm";
+import {validation } from '../validationForm'
 import '../css/calendar.css'
 class Calendar extends Component {
     state = {
@@ -12,30 +13,36 @@ class Calendar extends Component {
                 label: 'First name',
                 name: 'firstName',
                 type: 'text',
+                required: true
             },
             {
                 id: 2,
                 label: 'Last name',
                 name: 'lastName',
                 type: 'text',
+                required: true
             },
             {
                 id: 3, 
                 label: 'Email',
                 name: 'email',
                 type: 'email',
+                pattern: '/^[^\s@]+@[^\s@]+\.[^\s@]+$/',
+                required: true
             },
             {
                 id: 4, 
                 label: 'Date',
                 name: 'date',
                 type: 'date',
+                required: true
             },
             {
                 id: 5, 
                 label: 'Time',
                 name: 'time',
                 type: 'time',
+                required: true
             },
         ],
         values: {
@@ -56,30 +63,25 @@ class Calendar extends Component {
         .catch(err => console.log(err))
     }
     handleSubmit = e => {
+        const { errors, values} = this.state
         e.preventDefault();
-        this.validation()
+        validation(values, errors)
+        if(validation) {
+          this.showErrors()
+        }
     }
-    
-    validation = () => {
-        const { values, errors} = this.state;
-          Object.keys(values).forEach(key => {
-            if (!values[key]) {
-                errors[key] = 'Field is empty!';
-            } else delete errors[key];
-            if(values['firstName'].length <= 2) {
-                errors['firstName'] = 'First name should be longer than 2 letters!'
-            } 
-             if(values['lastName'].length <= 2) {
-                errors['lastName'] = 'Last name should be longer than 2 letters!'
-            }
-             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (values.email && !emailRegex.test(values.email)) {
-            errors.email = 'Email is not valid';
-         }
-         });
-         if (Object.keys(errors).length > 0) {
+
+    showErrors = () => {
+        const { errors } = this.state; 
+        if (Object.keys(errors).length > 0) {
             this.setState({ errors });
-        } else {
+        }
+        else {
+            this.addMeeting()
+        }
+    }
+    addMeeting = () => {
+        const {  values } = this.state; 
             this.setState({ errors: {} });
             postDataToAPI(values)
             .then(() => {
@@ -92,9 +94,8 @@ class Calendar extends Component {
             Object.keys(values).forEach(key => {
                 values[key] = "";
             })
-        }
     }
-    
+
     onChange = e => {
         const { name, value } = e.target;
         this.setState(prevState => ({
@@ -103,9 +104,9 @@ class Calendar extends Component {
                 [name]: value,
             },
         }));
-        if(name === 'firstName') {
-            this.showInputAutoComplete(value);
-        }
+    }
+    onClick = e => {
+        console.log(e)
     }
     showInputAutoComplete = (value) => {
         if(value.length > 0) {
@@ -116,17 +117,17 @@ class Calendar extends Component {
             })
             .catch(err => console.log(err));
         } else {
-            this.setState({ autoComplete: {}})
+            this.setState({ autoComplete: []})
         } 
-    
-    }    
+    }
+        
 render() {
     const { meetings, inputs, values, errors, autoComplete } = this.state;
     return (
         <section className="calendar">
             <h1 className="calendar__heading">Calendar</h1>
             <CalendarList meetingList={meetings}/>
-            <CalendarForm inputFields={ inputs } values={ values } submit={this.handleSubmit} onChange={this.onChange} errors={errors} autoComplete={autoComplete}/>
+            <CalendarForm inputFields={ inputs } values={ values } submit={this.handleSubmit} onChange={this.onChange} onClick={this.onClick} errors={errors} autoComplete={autoComplete} />
         </section>
     )
 }
